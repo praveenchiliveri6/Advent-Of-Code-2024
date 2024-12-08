@@ -8,6 +8,7 @@ ll n,m;
 set<pair<ll,ll>> antiNodeLocations;
 
 pair<ll,ll> findSlope(pair<ll,ll> p1,pair<ll,ll> p2){
+    // slope = (y2-y1)/(x2-x1)
     ll x1=p1.first,y1=p1.second;
     ll x2=p2.first,y2=p2.second;
     ll num=y2-y1;
@@ -20,7 +21,7 @@ pair<ll,ll> findSlope(pair<ll,ll> p1,pair<ll,ll> p2){
     return {num,den};
 }
 
-void findAntiNodesWithSlope(pair<ll,ll> cord1, pair<ll,ll> cord2, pair<ll,ll> slope){
+void findAntiNodesWithGivenSlope(pair<ll,ll> cord1, pair<ll,ll> cord2, pair<ll,ll> slope){
     // y=y1+slope(x-x1)
     ll x1=cord1.first,y1=cord1.second;
     ll x2=cord2.first,y2=cord2.second;
@@ -71,7 +72,7 @@ void calculateNumberOfAntiNodes(){
         for(ll index1=0;index1<sz-1;index1++)
             for(ll index2=index1+1;index2<sz;index2++){
                 pair<ll,ll> slope=findSlope(indexVector[index1],indexVector[index2]);
-                findAntiNodesWithSlope(indexVector[index1],indexVector[index2],slope);
+                findAntiNodesWithGivenSlope(indexVector[index1],indexVector[index2],slope);
             }
     }
     
