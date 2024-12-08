@@ -24,13 +24,13 @@ void findAntiNodesWithSlope(pair<ll,ll> cord1, pair<ll,ll> cord2, pair<ll,ll> sl
     // y=y1+slope(x-x1)
     ll x1=cord1.first,y1=cord1.second;
     ll x2=cord2.first,y2=cord2.second;
-    ll mx=slope.first,my=slope.second;
+    ll my=slope.first,mx=slope.second;
     ll totalCount=0;
     for(ll x=x1;x>0;x--){
-        ll y=mx*(x-x1);
-        if(my==0 or y%my!=0)
+        ll y=my*(x-x1);
+        if(mx==0 or y%mx!=0)
             continue;
-        y/=my;
+        y/=mx;
         y+=y1;
         if(y>=1 and y<=m and x!=x2 and y!=y2 and x!=x1 and y!=y1){
             antiNodeLocations.insert({x,y});
@@ -42,10 +42,10 @@ void findAntiNodesWithSlope(pair<ll,ll> cord1, pair<ll,ll> cord2, pair<ll,ll> sl
     swap(y1,y2);
     
     for(ll x=x1;x<=n;x++){
-        ll y=mx*(x-x1);
-        if(my==0 or y%my!=0)
+        ll y=my*(x-x1);
+        if(mx==0 or y%mx!=0)
             continue;
-        y/=my;
+        y/=mx;
         y+=y1;
         if(y>=1 and y<=m and x!=x2 and y!=y2 and x!=x1 and y!=y1){
             antiNodeLocations.insert({x,y});
@@ -69,7 +69,7 @@ void calculateNumberOfAntiNodes(){
         vector<pair<ll,ll>> indexVector=entry.second;
         ll sz=indexVector.size();
         for(ll index1=0;index1<sz-1;index1++)
-            for(ll index2=1;index2<sz;index2++){
+            for(ll index2=index1+1;index2<sz;index2++){
                 pair<ll,ll> slope=findSlope(indexVector[index1],indexVector[index2]);
                 findAntiNodesWithSlope(indexVector[index1],indexVector[index2],slope);
             }
